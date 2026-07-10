@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yupitechnologies.com/sitemap.xml
+Sitemap: https://yupitech.mutechlabs.com/sitemap.xml

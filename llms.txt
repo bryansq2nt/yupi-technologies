@@ -4,7 +4,7 @@ YupiTech crea agentes y asistentes virtuales con inteligencia artificial para ne
 
 ## Sitio principal
 
-- https://yupitechnologies.com/
+- https://yupitech.mutechlabs.com/
 
 ## Servicios comunicados por YupiTech
 
