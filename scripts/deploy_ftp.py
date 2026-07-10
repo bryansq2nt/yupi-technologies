@@ -84,7 +84,7 @@ def load_config(args: argparse.Namespace) -> Config:
         env_value(
             values,
             "FTP_EXCLUDE",
-            ".git,.git/*,.deploy.env,.deploy.env.example,.DS_Store,__pycache__,*.pyc,*.md,scripts,scripts/*,work,work/*",
+            ".git,.git/*,.gitignore,.deploy.env,.deploy.env.example,.DS_Store,__pycache__,*.pyc,*.md,scripts,scripts/*,work,work/*",
         )
     )
     protected_paths = csv(
@@ -100,7 +100,7 @@ def load_config(args: argparse.Namespace) -> Config:
         port=int(args.port or env_value(values, "FTP_PORT", "21")),
         username=username,
         password=password,
-        remote_dir=args.remote_dir or env_value(values, "FTP_REMOTE_DIR", "/public_html/yupitech"),
+        remote_dir=args.remote_dir or env_value(values, "FTP_REMOTE_DIR", "/yupitech.mutechlabs.com/public_html"),
         local_dir=local_dir,
         use_tls=bool_value(env_value(values, "FTP_TLS", "1")),
         timeout=int(env_value(values, "FTP_TIMEOUT", "45")),
@@ -144,7 +144,15 @@ def matches_any(path: str, patterns: tuple[str, ...]) -> bool:
     name = posixpath.basename(normalized)
     for pattern in patterns:
         p = pattern.strip("/")
-        if fnmatch.fnmatch(normalized, p) or fnmatch.fnmatch(name, p):
+        if "/" in p:
+            if fnmatch.fnmatch(normalized, p):
+                return True
+            continue
+        if any(char in p for char in "*?[]"):
+            if fnmatch.fnmatch(name, p):
+                return True
+            continue
+        if normalized == p or (p.startswith(".") and name == p):
             return True
     return False
 

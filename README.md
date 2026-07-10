@@ -36,7 +36,7 @@ Antes del primer deploy, listar la raiz del FTP para confirmar el directorio cor
 python3 scripts/deploy_ftp.py --list-root
 ```
 
-Luego ajustar `FTP_REMOTE_DIR` en `.deploy.env` si hace falta y desplegar:
+El document root confirmado para este subdominio es `/yupitech.mutechlabs.com/public_html`. Luego desplegar:
 
 ```bash
 python3 scripts/deploy_ftp.py
